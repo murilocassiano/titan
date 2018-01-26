@@ -1,5 +1,9 @@
 from django.contrib import admin
 
-from .models import Question
+from .models import Asset
 
-admin.site.register(Question)
+from .models import Transaction
+
+admin.site.register(Asset)
+
+admin.site.register(Transaction)
