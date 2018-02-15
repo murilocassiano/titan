@@ -16,7 +16,7 @@ class Asset(models.Model):
 
 class Date(models.Model):
     date =  models.DateTimeField(
-        default= datetime.date(2015,9,29),
+        default= datetime.date(1000,1,1),
         unique=True)
 
     weekday = models.CharField(
