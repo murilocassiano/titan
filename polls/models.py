@@ -14,7 +14,7 @@ class Asset(models.Model):
     )
 
 class Transaction(models.Model):
-    asset = models.ForeignKey(Asset)
+    asset = models.ForeignKey('Asset', on_delete=models.DO_NOTHING)
 
     nature = models.CharField(
         max_length=20,
@@ -39,7 +39,7 @@ class Transaction(models.Model):
 
 
 class Historic(models.Model):
-    asset = models.ForeignKey(Asset)
+    asset = models.ForeignKey('Asset', on_delete=models.DO_NOTHING)
     day_price = models.FloatField(
         verbose_name="preço do dia"
     )
@@ -47,3 +47,25 @@ class Historic(models.Model):
     date = models.DateTimeField(
         default=datetime.date(1000,1,1)
     )    
+
+    Open = models.FloatField(
+        verbose_name="Open"
+    )
+
+    High = models.FloatField(
+        verbose_name="High"
+    )
+
+    Low = models.FloatField(
+        verbose_name="Low"
+    )
+
+    Close = models.FloatField(
+        verbose_name="Close"
+    )
+
+    Volume =models.FloatField(
+        verbose_name="Volume"
+    )
+    class Meta:
+        unique_together = (('date','asset','Open'),('date','asset','High'),('date','asset','Low'),('date','asset','Close'),('date','asset','Volume'))
