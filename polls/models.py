@@ -13,6 +13,11 @@ class Asset(models.Model):
         verbose_name="Código do Ativo"
     )
 
+    typ = models.CharField(
+        max_length=200,
+        verbose_name="tipo de ativo"
+        )
+
 class Transaction(models.Model):
     asset = models.ForeignKey('Asset', on_delete=models.DO_NOTHING)
 
@@ -21,6 +26,10 @@ class Transaction(models.Model):
         choices = (('CP', 'Compra'), ('VD', 'Venda')),
         default = "CP"
     )
+
+    fraction = models.BooleanField(
+        verbose_name="Fracionado"
+        )
 
     unit_price = models.FloatField(
         verbose_name="Valor unitário da Transação"
@@ -40,6 +49,7 @@ class Transaction(models.Model):
 
 class Historic(models.Model):
     asset = models.ForeignKey('Asset', on_delete=models.DO_NOTHING)
+
     day_price = models.FloatField(
         verbose_name="preço do dia"
     )
